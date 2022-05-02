@@ -20,10 +20,21 @@ class Spacecraft {
   }
 }
 
+// single inheritance
+class Orbiter extends Spacecraft {
+  double altitude;
+
+  Orbiter(String name, DateTime launchDate, this.altitude)
+      : super(name, launchDate);
+}
+
 void main(List<String> args) {
   var voyager = Spacecraft('Voyager I', DateTime(1977, 9, 5));
   voyager.describe();
 
   var voyager3 = Spacecraft.unlaunched('Voyager III');
   voyager3.describe();
+
+  var orbiter = Orbiter('Orbiter', DateTime(1991, 6, 3), 10);
+  orbiter.describe();
 }
