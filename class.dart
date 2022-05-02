@@ -28,13 +28,44 @@ class Orbiter extends Spacecraft {
       : super(name, launchDate);
 }
 
+// mixins
+mixin Piloted {
+  int astronauts = 1;
+
+  void describeCrew() {
+    print('Number of astronauts: $astronauts');
+  }
+}
+
+class PilotedCraft extends Spacecraft with Piloted {
+  PilotedCraft(String name, DateTime? launchDate) : super(name, launchDate);
+
+  @override
+  void describe() {
+    super.describe();
+    super.describeCrew();
+  }
+}
+
+// abstract class
+abstract class Describable {
+  void describe();
+
+  void describeWithEmphasis() {
+    print('========');
+    describe();
+    print('========');
+  }
+}
+
+class HelloWorld extends Describable {
+  @override
+  void describe() {
+    print('Hello World!');
+  }
+}
+
 void main(List<String> args) {
-  var voyager = Spacecraft('Voyager I', DateTime(1977, 9, 5));
-  voyager.describe();
-
-  var voyager3 = Spacecraft.unlaunched('Voyager III');
-  voyager3.describe();
-
-  var orbiter = Orbiter('Orbiter', DateTime(1991, 6, 3), 10);
-  orbiter.describe();
+  var helloWorld = new HelloWorld();
+  helloWorld.describeWithEmphasis();
 }
